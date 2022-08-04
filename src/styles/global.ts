@@ -20,8 +20,16 @@ export default createGlobalStyle`
     }
   }
 
+  html {
+    background-color: ${props => props.theme.white};
+    
+  }
+  
   body {
-    background: ${props => props.theme.background};
+    background-color: ${props => props.theme.background};
+    width: 350px;
+    height: 600px;
+
   }
 
   body, input, textarea, button {
