@@ -1,7 +1,13 @@
+import Playlists from 'components/Playlists';
 import React from 'react';
+import { Container } from './style';
 
 const Home: React.FC = () => {
-  return <h1>Home</h1>;
+  return (
+    <Container>
+      <Playlists />
+    </Container>
+  );
 };
 
 export default Home;

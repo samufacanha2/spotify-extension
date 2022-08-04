@@ -1,4 +1,3 @@
-import { transparentize } from 'polished';
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
@@ -6,6 +5,7 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    color: ${props => props.theme.white};
   }
 
   @media (max-width: 1080px) {
@@ -26,10 +26,14 @@ export default createGlobalStyle`
   }
   
   body {
-    background-color: ${props => props.theme.background};
+    background-color: ${props => props.theme.dark};
     width: 350px;
     height: 600px;
+    overflow: hidden;
+  }
 
+  #root {
+    height: 100%;
   }
 
   body, input, textarea, button {
@@ -62,21 +66,4 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
-    ::-webkit-scrollbar {
-    width: 0.3em;
-    z-index: 1;
-  }
-  ::-webkit-scrollbar-track {
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-    box-shadow: inset 0 0 0.25rem rgba(0, 0, 0, 0.3);
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: ${props => transparentize(0.2, props.theme.primary)};
-
-    border-radius: 10px;
-  }
-  
 `;
