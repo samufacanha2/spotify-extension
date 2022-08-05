@@ -1,4 +1,4 @@
-import Playlist from 'components/Playlist';
+import PlaylistMini from './PlaylistMini';
 import { useEffect } from 'react';
 import { IPlaylist } from 'types';
 import { Body, Container, Title } from './style';
@@ -15,7 +15,7 @@ const Playlists: React.FC<IPlaylistProps> = ({ playlists }) => {
       <Title>Playlists</Title>
       <Body>
         {playlists?.slice(0, 4).map(playlist => (
-          <Playlist playlist={playlist} />
+          <PlaylistMini playlist={playlist} />
         ))}
       </Body>
     </Container>

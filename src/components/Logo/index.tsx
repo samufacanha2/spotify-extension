@@ -1,7 +1,15 @@
 import { Container } from './style';
 
+import { SiSpotify } from 'react-icons/si';
+
 const Logo: React.FC = () => {
-  return <Container>Spotify-y</Container>;
+  return (
+    <Container>
+      {' '}
+      <SiSpotify />
+      Spotify-y
+    </Container>
+  );
 };
 
 export default Logo;

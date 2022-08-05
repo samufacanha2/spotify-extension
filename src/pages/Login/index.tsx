@@ -4,7 +4,7 @@ import { Container, LoginAnchor } from './style';
 const Login: React.FC = () => {
   return (
     <Container>
-      <LoginAnchor href="http://localhost:8888">Login</LoginAnchor>
+      <LoginAnchor href="http://localhost:8888/login">Login</LoginAnchor>
     </Container>
   );
 };

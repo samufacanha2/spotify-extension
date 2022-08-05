@@ -25,8 +25,8 @@ const Home: React.FC = () => {
     const init = async () => {
       const params = getHashParams();
       console.log(params);
-      localStorage.setItem('access_token', params.access_token);
-      localStorage.setItem('refresh_token', params.refresh_token);
+      sessionStorage.setItem('access_token', params.access_token);
+      sessionStorage.setItem('refresh_token', params.refresh_token);
 
       const playlistsResponse: IPlaylistResponse = await api.get(
         '/me/playlists',

@@ -8,7 +8,7 @@ import { Body, Container, Header } from './style';
 
 const Layout: React.FC = () => {
   const permission =
-    localStorage.getItem('access_token') ||
+    sessionStorage.getItem('access_token') ||
     (window.location.pathname.split('/')[1] === 'feed' &&
       window.location.pathname.split('/')[2] !== '');
   return permission ? (
