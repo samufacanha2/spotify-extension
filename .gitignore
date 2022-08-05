@@ -42,3 +42,5 @@ yarn-error.log*
 /wasm/*.wasm
 
 *.pem
+
+api_auth/node_modules
