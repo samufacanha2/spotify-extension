@@ -30,6 +30,7 @@ export default createGlobalStyle`
     width: 350px;
     height: 600px;
     overflow: hidden;
+    position: relative;
   }
 
   #root {

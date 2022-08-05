@@ -42,9 +42,29 @@ const Home: React.FC = () => {
     };
     init();
   }, []);
+
+  const mockImage = () => {
+    return (
+      playlists.length > 0 && (
+        <img
+          src={playlists[0].images[0].url}
+          alt={playlists[0].name}
+          width={120}
+        />
+      )
+    );
+  };
   return (
     <Container>
       <Playlists playlists={playlists} key={String(playlists)} />
+      <h2>Your Daily Mix #1</h2>
+      {mockImage()}
+      <h2>Your Daily Mix #2</h2>
+      {mockImage()}
+      <h2>Your Daily Mix #3</h2>
+      {mockImage()}
+      <h2>Your Daily Mix #4</h2>
+      {mockImage()}
     </Container>
   );
 };

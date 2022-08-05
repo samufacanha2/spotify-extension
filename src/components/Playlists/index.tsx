@@ -1,6 +1,7 @@
+import Playlist from 'components/Playlist';
 import { useEffect } from 'react';
 import { IPlaylist } from 'types';
-import { Container } from './style';
+import { Body, Container, Title } from './style';
 
 interface IPlaylistProps {
   playlists?: IPlaylist[];
@@ -11,13 +12,12 @@ const Playlists: React.FC<IPlaylistProps> = ({ playlists }) => {
   }, [playlists]);
   return (
     <Container>
-      Playlists
-      {playlists?.map(playlist => (
-        <div key={String(playlist)}>
-          <img src={playlist.images[0].url} alt={playlist.name} width={40} />
-          {playlist.name}
-        </div>
-      ))}
+      <Title>Playlists</Title>
+      <Body>
+        {playlists?.slice(0, 4).map(playlist => (
+          <Playlist playlist={playlist} />
+        ))}
+      </Body>
     </Container>
   );
 };
