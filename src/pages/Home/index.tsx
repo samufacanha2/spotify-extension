@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import api from 'services/api';
 import { IPlaylist } from 'types';
 import { IPlaylistResponse } from 'types/dtos';
-import { Container } from './style';
+import { Container, Section, SectionTitle, SideScrollContainer } from './style';
 
 const Home: React.FC = () => {
   const [playlists, setPlaylists] = React.useState<IPlaylist[]>([]);
@@ -43,28 +43,37 @@ const Home: React.FC = () => {
     init();
   }, []);
 
-  const mockImage = () => {
+  const mockImages = (initialNumber: number) => {
     return (
-      playlists.length > 0 && (
+      playlists.length > 0 &&
+      [1, 2, 3, 4, 5].map(i => (
         <img
-          src={playlists[0].images[0].url}
-          alt={playlists[0].name}
+          src={playlists[i + initialNumber].images[0].url}
+          alt={playlists[i + initialNumber].name}
           width={120}
         />
-      )
+      ))
     );
   };
   return (
     <Container>
       <Playlists playlists={playlists} key={String(playlists)} />
-      <h2>Your Daily Mix #1</h2>
-      {mockImage()}
-      <h2>Your Daily Mix #2</h2>
-      {mockImage()}
-      <h2>Your Daily Mix #3</h2>
-      {mockImage()}
-      <h2>Your Daily Mix #4</h2>
-      {mockImage()}
+      <Section>
+        <SectionTitle>Hear Again</SectionTitle>
+        <SideScrollContainer>{mockImages(0)}</SideScrollContainer>
+      </Section>
+      <Section>
+        <SectionTitle>Your Daily Mix #1</SectionTitle>
+        <SideScrollContainer>{mockImages(2)}</SideScrollContainer>
+      </Section>
+      <Section>
+        <SectionTitle>Your Daily Mix #2</SectionTitle>
+        <SideScrollContainer>{mockImages(4)}</SideScrollContainer>
+      </Section>
+      <Section>
+        <SectionTitle>Your Daily Mix #3</SectionTitle>
+        <SideScrollContainer>{mockImages(6)}</SideScrollContainer>
+      </Section>
     </Container>
   );
 };

@@ -1,28 +1,24 @@
-import { createContext, useContext, useState } from 'react';
-import { Outlet, useNavigate } from 'react-router';
+import { Buffer } from 'buffer';
+import { createContext, useContext } from 'react';
+import { Outlet } from 'react-router';
 import { generateRandomString, getQueryString } from 'utils';
 
 interface ILogin {
   login: () => void;
   callback: () => Promise<void>;
-  storedState: string;
 }
 
 export const LoginContext = createContext({} as ILogin);
 
 export const LoginProvider: React.FC = () => {
-  const [storedState, setStoredState] = useState('');
   const stateKey = 'spotify_auth_state';
   const client_id = process.env.REACT_APP_CLIENT_ID;
   const client_secret = process.env.REACT_APP_CLIENT_SECRET;
   const redirect_uri = process.env.REACT_APP_REDIRECT_URI;
 
-  const navigate = useNavigate();
-
   const login = () => {
     const state = generateRandomString(16);
-    setStoredState(state);
-    console.log(state);
+    localStorage.setItem(stateKey, state);
 
     const scope =
       'user-read-private user-read-email user-read-currently-playing user-read-playback-state user-read-recently-played';
@@ -41,7 +37,7 @@ export const LoginProvider: React.FC = () => {
   };
 
   const callback = async (): Promise<void> => {
-    console.log('here');
+    const storedState = localStorage.getItem(stateKey);
 
     const code = window.location.search.split('&')[0].split('=')[1];
     const state = window.location.search.split('&')[1].split('=')[1];
@@ -54,33 +50,36 @@ export const LoginProvider: React.FC = () => {
       localStorage.removeItem(stateKey);
 
       try {
+        const auth =
+          'Basic ' +
+          Buffer.from(client_id + ':' + client_secret).toString('base64');
         const request = await fetch('https://accounts.spotify.com/api/token', {
           method: 'POST',
           headers: {
-            Authorization:
-              'Basic ' +
-              new Buffer(client_id + ':' + client_secret).toString('base64'),
+            Authorization: auth,
+            'Content-Type': 'application/x-www-form-urlencoded',
           },
-          body: JSON.stringify({
-            code,
-            redirect_uri: redirect_uri,
+          body: getQueryString({
             grant_type: 'authorization_code',
+            code,
+            redirect_uri,
           }),
         });
 
         const response = await request.json();
 
-        if (request.ok && response.statusCode === 200) {
+        if (request.ok && request.status === 200) {
           const access_token = response.access_token,
             refresh_token = response.refresh_token;
 
-          navigate(
+          const a = document.createElement('a');
+          a.href =
             'http://localhost:3000/feed/' +
-              getQueryString({
-                access_token: access_token,
-                refresh_token: refresh_token,
-              }),
-          );
+            getQueryString({
+              access_token: access_token,
+              refresh_token: refresh_token,
+            });
+          a.click();
         } else {
           throw new Error('Invalid Token');
         }
@@ -93,7 +92,6 @@ export const LoginProvider: React.FC = () => {
   const values: ILogin = {
     login,
     callback,
-    storedState,
   };
 
   return (
