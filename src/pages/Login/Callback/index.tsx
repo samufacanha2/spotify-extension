@@ -3,13 +3,14 @@ import { useEffect } from 'react';
 import { Container } from './style';
 
 const Callback: React.FC = () => {
-  const { callback, storedState } = useLogin();
+  const { callback } = useLogin();
 
   useEffect(() => {
+    const storedState = localStorage.getItem('spotify_auth_state');
     if (storedState) {
       (async () => await callback())();
     }
-  }, [storedState]);
+  }, []);
 
   return <Container></Container>;
 };
