@@ -1,10 +1,12 @@
-import React from 'react';
+import { useLogin } from 'Contexts/login';
 import { Container, LoginAnchor } from './style';
 
 const Login: React.FC = () => {
+  const { login } = useLogin();
+
   return (
     <Container>
-      <LoginAnchor href="http://localhost:8888/login">Login</LoginAnchor>
+      <LoginAnchor onClick={login}>Login</LoginAnchor>
     </Container>
   );
 };

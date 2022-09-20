@@ -67,4 +67,20 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
+   ::-webkit-scrollbar {
+    width: 0.675rem;
+    z-index: 1;
+  }
+  ::-webkit-scrollbar-track {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    box-shadow: inset 0 0 0.25rem rgba(0, 0, 0, 0.3);
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${props => props.theme.white};
+
+    border-radius: 10px;
+  }
 `;
