@@ -39,4 +39,11 @@ export const SideScrollContainer = styled.div`
     height: 0.25rem;
     z-index: 1;
   }
+
+  img {
+    &:hover {
+      cursor: pointer;
+      user-select: none;
+    }
+  }
 `;
