@@ -8,9 +8,9 @@
     "default_title": "Open the popup"
   },
   "icons": {
-    "16": "favicon.ico",
-    "48": "favicon.ico",
-    "128": "favicon.ico"
+    "16": "favicon.svg",
+    "48": "favicon.svg",
+    "128": "favicon.svg"
   },
   "start_url": ".",
   "display": "standalone",

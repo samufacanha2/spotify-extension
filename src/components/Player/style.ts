@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { FaPlay } from 'react-icons/fa';
 
 export const Container = styled.div`
   padding: 0 0.5rem;
@@ -12,17 +11,18 @@ export const Container = styled.div`
   bottom: 3rem;
   left: 0;
   right: 0;
-  height: 3rem;
+  min-height: 3rem;
+  width: 100%;
   background-color: ${props => props.theme.lightgreen};
-`;
 
-export const Info = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+  path {
+    color: ${props => props.theme.dark};
+  }
 
-export const StyledPlay = styled(FaPlay)`
-  color: ${props => props.theme.white};
-  font-size: 2rem;
-  margin-left: auto;
+  > div {
+    background-color: unset !important;
+  }
+  p {
+    max-width: 15rem;
+  }
 `;

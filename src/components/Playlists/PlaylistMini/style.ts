@@ -6,6 +6,11 @@ export const Container = styled.div`
   gap: 0.5rem;
 
   width: 175px;
+
+  &:hover {
+    cursor: pointer;
+    user-select: none;
+  }
 `;
 
 export const StyledImg = styled.img`

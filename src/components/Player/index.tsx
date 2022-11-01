@@ -1,33 +1,16 @@
-import { useCallback, useEffect, useState } from 'react';
-import api from 'services/api';
-import { Container, Info, StyledPlay } from './style';
+import { Container } from './style';
+
+import SpotifyPlayer from 'react-spotify-web-playback';
 
 const Player: React.FC = () => {
-  //TODO: get CURRENT
-  const [current, setCurrent] = useState<any>(null);
-  const getCurrentSong = useCallback(async () => {
-    const currentSong = await api.get('/me/player/recently-played', {
-      headers: {
-        Authorization: `Bearer ${sessionStorage.getItem('access_token')}`,
-      },
-    });
-
-    console.log(currentSong);
-
-    setCurrent(currentSong.data.items[1]);
-  }, []);
-
-  useEffect(() => {
-    getCurrentSong();
-  }, []);
   return (
     <Container>
-      <img src={current?.track.album.images[0].url} alt="" width={42} />
-      <Info>
-        {current?.track?.name}
-        <p>{current?.track?.artists[0].name}</p>
-      </Info>
-      <StyledPlay />
+      <SpotifyPlayer
+        autoPlay
+        token="BQD6Lmd6D4Szrf25bg6Chvv9cPjxoCX6d5_wQOetCHgi2GW9PuTVnsqmF-MKn68gxqYDOiLI4-S2NovlQGrmb1OQtJ20_18xZgn7_G8RJHlwYK7eBCMNhW3oDWhZ5qM_hbU8gjT7JpyCuYyQKL5neY5XobbRGVT8mo7GrX9Qr2ml-eTvCkFALyOymfNHc4RvVhTPAKRE33EiMA0wyeq_ldfoZnsYX5oK5aM"
+        uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
+        name="Extension Player"
+      />
     </Container>
   );
 };
