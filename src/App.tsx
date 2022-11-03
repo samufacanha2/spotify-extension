@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { ThemeProvider } from 'styled-components';
 
 import GlobalStyle from './styles/global';
@@ -11,7 +9,7 @@ import Router from './routes';
 
 const App: React.FC = () => (
   <ThemeProvider theme={dark}>
-    <ToastContainer autoClose={2000} position="top-right" />
+    <ToastContainer autoClose={2000} position="top-left" />
     <GlobalStyle />
     <Router />
   </ThemeProvider>

@@ -1,12 +1,12 @@
-import PlaylistMini from './PlaylistMini';
 import { useEffect } from 'react';
 import { IPlaylist } from 'types';
+import PlaylistMini from './PlaylistMini';
 import { Body, Container, Title } from './style';
 
 interface IPlaylistProps {
   playlists?: IPlaylist[];
 }
-const Playlists: React.FC<IPlaylistProps> = ({ playlists }) => {
+const PlaylistCards: React.FC<IPlaylistProps> = ({ playlists }) => {
   useEffect(() => {
     console.log('playlists', playlists);
   }, [playlists]);
@@ -22,4 +22,4 @@ const Playlists: React.FC<IPlaylistProps> = ({ playlists }) => {
   );
 };
 
-export default Playlists;
+export default PlaylistCards;

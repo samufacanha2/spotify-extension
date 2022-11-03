@@ -1,8 +1,8 @@
-import Playlists from 'components/Playlists';
+import Playlists from 'components/PlaylistsCard';
 import React, { useEffect } from 'react';
 import api from 'services/api';
 import { IPlaylist } from 'types';
-import { IPlaylistResponse } from 'types/dtos';
+import { IPlaylistsResponse } from 'types/dtos';
 import { Container, Section, SectionTitle, SideScrollContainer } from './style';
 
 const Home: React.FC = () => {
@@ -23,16 +23,25 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     const init = async () => {
+      let access_token: string;
+      let refresh_token: string;
       const params = getHashParams();
-      console.log(params);
-      sessionStorage.setItem('access_token', params.access_token);
-      sessionStorage.setItem('refresh_token', params.refresh_token);
+      if (params.access_token) {
+        sessionStorage.setItem('access_token', params.access_token);
+        sessionStorage.setItem('refresh_token', params.refresh_token);
+        access_token = params.access_token;
+        refresh_token = params.refresh_token;
+      } else {
+        access_token = sessionStorage.getItem('access_token') || '';
+        refresh_token = sessionStorage.getItem('refresh_token') || '';
+        console.log(refresh_token);
+      }
 
-      const playlistsResponse: IPlaylistResponse = await api.get(
+      const playlistsResponse: IPlaylistsResponse = await api.get(
         '/me/playlists',
         {
           headers: {
-            Authorization: `Bearer ${params.access_token}`,
+            Authorization: `Bearer ${access_token}`,
           },
         },
       );
