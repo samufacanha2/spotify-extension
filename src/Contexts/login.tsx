@@ -21,7 +21,7 @@ export const LoginProvider: React.FC = () => {
     localStorage.setItem(stateKey, state);
 
     const scope =
-      'user-read-private user-read-email user-read-currently-playing user-read-playback-state user-read-recently-played';
+      'user-read-private user-read-email user-read-currently-playing user-read-playback-state user-read-recently-played user-modify-playback-state streaming';
 
     const a = document.createElement('a');
     a.href =

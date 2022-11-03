@@ -14,6 +14,7 @@ export interface IPlaylist {
   tracks: ITracks;
   type: string;
   uri: string;
+  id: string;
 }
 
 export interface IOwner {
@@ -30,6 +31,32 @@ export interface IOwner {
 export interface ITracks {
   href: string;
   total: number;
+  items: ITrackItem[];
+}
+
+export interface ITrackItem {
+  added_at: string;
+  track: ITrack;
+}
+
+export interface ITrack {
+  id: string;
+  name: string;
+  artists: IArtist[];
+  duration_ms: number;
+  album: IAlbum;
+  uri: string;
+}
+
+export interface IAlbum {
+  id: string;
+  name: string;
+  images: Image[];
+}
+
+export interface IArtist {
+  id: string;
+  name: string;
 }
 
 export interface Image {

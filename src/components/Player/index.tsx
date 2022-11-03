@@ -1,14 +1,21 @@
 import { Container } from './style';
 
+import { usePlayer } from 'Contexts/player';
 import SpotifyPlayer from 'react-spotify-web-playback';
 
 const Player: React.FC = () => {
+  const accessToken = sessionStorage.getItem('access_token') || '';
+
+  const { player, uris } = usePlayer();
+
   return (
     <Container>
       <SpotifyPlayer
         autoPlay
-        token="BQD6Lmd6D4Szrf25bg6Chvv9cPjxoCX6d5_wQOetCHgi2GW9PuTVnsqmF-MKn68gxqYDOiLI4-S2NovlQGrmb1OQtJ20_18xZgn7_G8RJHlwYK7eBCMNhW3oDWhZ5qM_hbU8gjT7JpyCuYyQKL5neY5XobbRGVT8mo7GrX9Qr2ml-eTvCkFALyOymfNHc4RvVhTPAKRE33EiMA0wyeq_ldfoZnsYX5oK5aM"
-        uris={['spotify:artist:6HQYnRM4OzToCYPpVBInuU']}
+        ref={player}
+        token={accessToken}
+        uris={uris}
+        key={uris[0]}
         name="Extension Player"
       />
     </Container>

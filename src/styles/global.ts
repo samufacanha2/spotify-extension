@@ -5,7 +5,6 @@ export default createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    color: ${props => props.theme.white};
   }
 
   @media (max-width: 1080px) {
@@ -35,6 +34,8 @@ export default createGlobalStyle`
 
   #root {
     height: 100%;
+    color: ${props => props.theme.white};
+
   }
 
   body, input, textarea, button {

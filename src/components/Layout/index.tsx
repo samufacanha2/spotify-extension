@@ -1,7 +1,7 @@
 import BottomNavigationBar from 'components/BottomNavigationBar';
 import Logo from 'components/Logo';
 import Player from 'components/Player';
-import React from 'react';
+import { PlayerProvider } from 'Contexts/player';
 import { Outlet } from 'react-router';
 import { Navigate } from 'react-router-dom';
 import { Body, Container, Header } from './style';
@@ -12,7 +12,7 @@ const Layout: React.FC = () => {
     (window.location.pathname.split('/')[1] === 'feed' &&
       window.location.pathname.split('/')[2] !== '');
   return permission ? (
-    <>
+    <PlayerProvider>
       <Container>
         <Header>
           <Logo />
@@ -23,7 +23,7 @@ const Layout: React.FC = () => {
         <Player />
         <BottomNavigationBar />
       </Container>
-    </>
+    </PlayerProvider>
   ) : (
     <Navigate to="/login" />
   );
