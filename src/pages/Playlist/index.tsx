@@ -95,7 +95,7 @@ const Playlist = () => {
               alt={track.track.name}
               onClick={(e: any) => handlePlay(e, track.track.uri)}
             />
-            <TrackContent>
+            <TrackContent onClick={(e: any) => handlePlay(e, track.track.uri)}>
               <TrackName>{track.track.name}</TrackName>
               <TrackArtist>{track.track.artists[0].name}</TrackArtist>
               <TrackDuration>
