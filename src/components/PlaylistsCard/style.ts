@@ -21,3 +21,12 @@ export const Body = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 0.5rem 0;
 `;
+
+export const More = styled.div`
+  font-size: 0.75rem;
+
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+`;

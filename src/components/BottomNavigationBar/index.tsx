@@ -1,27 +1,35 @@
 import { RiHome5Fill, RiSearchLine } from 'react-icons/ri';
 import { Container, NavItem, NavItemLabel } from './style';
 
+import { useState } from 'react';
 import { ImBooks } from 'react-icons/im';
 import { useNavigate } from 'react-router';
 
 const BottomNavigationBar: React.FC = () => {
+  const [active, setActive] = useState(0);
   const navigate = useNavigate();
 
   const handleHome = () => {
     navigate('/feed');
+    setActive(0);
+  };
+
+  const handleLibrary = () => {
+    navigate('/playlists');
+    setActive(2);
   };
 
   return (
     <Container>
-      <NavItem active onClick={handleHome}>
+      <NavItem active={active === 0} onClick={handleHome}>
         <RiHome5Fill />
         <NavItemLabel>Home</NavItemLabel>
       </NavItem>
-      <NavItem>
+      <NavItem active={active === 1}>
         <RiSearchLine />
         <NavItemLabel>Search</NavItemLabel>
       </NavItem>
-      <NavItem>
+      <NavItem active={active === 2} onClick={handleLibrary}>
         <ImBooks />
         <NavItemLabel>Library</NavItemLabel>
       </NavItem>
