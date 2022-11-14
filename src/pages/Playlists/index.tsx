@@ -55,7 +55,7 @@ const Playlists = () => {
           <h1>Playlists</h1>
         </HeaderContent>
 
-        <Back onClick={handleBack}>Voltar</Back>
+        <Back onClick={handleBack}>Back</Back>
       </Header>
 
       <Content>

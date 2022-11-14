@@ -14,6 +14,11 @@ const BottomNavigationBar: React.FC = () => {
     setActive(0);
   };
 
+  const handleSearch = () => {
+    navigate('/search');
+    setActive(1);
+  };
+
   const handleLibrary = () => {
     navigate('/playlists');
     setActive(2);
@@ -25,7 +30,7 @@ const BottomNavigationBar: React.FC = () => {
         <RiHome5Fill />
         <NavItemLabel>Home</NavItemLabel>
       </NavItem>
-      <NavItem active={active === 1}>
+      <NavItem active={active === 1} onClick={handleSearch}>
         <RiSearchLine />
         <NavItemLabel>Search</NavItemLabel>
       </NavItem>

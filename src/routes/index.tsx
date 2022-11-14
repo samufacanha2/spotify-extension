@@ -4,6 +4,7 @@ import Login from 'pages/Login';
 import Callback from 'pages/Login/Callback';
 import Playlist from 'pages/Playlist';
 import Playlists from 'pages/Playlists';
+import Search from 'pages/Search';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import Home from '../pages/Home/';
@@ -21,9 +22,11 @@ const Router: React.FC = () => {
 
         <Route path="/" element={<Layout />}>
           <Route path="feed/*" element={<Home />} />
-          <Route path="playlist/:playlistId" element={<Playlist />} />
 
           <Route path="playlists" element={<Playlists />} />
+          <Route path="playlist/:playlistId" element={<Playlist />} />
+
+          <Route path="search" element={<Search />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/login" replace />} />

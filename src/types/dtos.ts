@@ -1,4 +1,4 @@
-import { IPlaylist } from 'types';
+import { IPlaylist, ITrack } from 'types';
 
 export interface IPlaylistsResponse {
   data: {
@@ -9,4 +9,12 @@ export interface IPlaylistsResponse {
 
 export interface IPlaylistResponse {
   data: IPlaylist;
+}
+
+export interface ISearchResponse {
+  data: {
+    tracks: {
+      items: ITrack[];
+    };
+  };
 }
