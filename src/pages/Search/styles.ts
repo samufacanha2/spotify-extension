@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const Container = styled.div`
   display: flex;
@@ -113,4 +113,34 @@ export const SearchContent = styled.div`
 
 export const SearchInput = styled.input`
   width: 100%;
+`;
+
+export const TypeContainer = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0 0.5rem;
+`;
+
+interface TypeProps {
+  active: boolean;
+  type: string;
+}
+
+export const TypeItem = styled.div<TypeProps>`
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+
+  background-color: ${props =>
+    props.active ? props.theme.darkgreen : props.theme.white};
+  color: ${props => (props.active ? props.theme.white : props.theme.dark)};
+
+  cursor: pointer;
+
+  ${props =>
+    props.type !== 'track' &&
+    css`
+      filter: grayscale(1) opacity(0.5);
+      cursor: not-allowed;
+    `}
 `;

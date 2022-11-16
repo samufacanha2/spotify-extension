@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useDebouncedState } from '@mantine/hooks';
+import { useDebouncedValue } from '@mantine/hooks';
 import { usePlayer } from 'Contexts/player';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
@@ -22,6 +22,8 @@ import {
   TrackDuration,
   TrackImg,
   TrackName,
+  TypeContainer,
+  TypeItem,
 } from './styles';
 
 import { FiSearch } from 'react-icons/fi';
@@ -36,7 +38,11 @@ const Search: React.FC = () => {
   const [playlists, setPlaylists] = useState<IPlaylist[]>();
 
   const [tracks, setTracks] = useState<ITrack[]>();
-  const [search, setSearch] = useDebouncedState<string>('', 200);
+  const [search, setSearch] = useState<string>('');
+  const [debouncedSearch] = useDebouncedValue(search, 200);
+
+  const types = ['track', 'artist', 'album'];
+  const [type, setType] = useState<'track' | 'album' | 'artist'>('track');
 
   const [playlistModalOpen, setPlaylistModalOpen] = useState(false);
   const [selectedTrack, setSelectedTrack] = useState<ITrack>();
@@ -51,7 +57,7 @@ const Search: React.FC = () => {
   useEffect(() => {
     const getPlaylists = async () => {
       const playlistResponse: IPlaylistsResponse = await api.get(
-        `/me/playlists`,
+        `/me/playlists?limit=50`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -66,7 +72,7 @@ const Search: React.FC = () => {
   useEffect(() => {
     const getTracks = async () => {
       const searchResponse: ISearchResponse = await api.get(
-        `/search?q=${search}&type=track`,
+        `/search?q=${debouncedSearch}&type=track`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -77,8 +83,8 @@ const Search: React.FC = () => {
       console.log(searchResponse);
       setTracks(searchResponse.data.tracks.items);
     };
-    search && getTracks();
-  }, [search]);
+    debouncedSearch && getTracks();
+  }, [debouncedSearch]);
 
   const handlePlay = async (e: any, uri: string) => {
     e.preventDefault();
@@ -110,7 +116,7 @@ const Search: React.FC = () => {
           isOpen={playlistModalOpen}
           setIsOpen={setPlaylistModalOpen}
           selectedTrack={selectedTrack}
-          playlists={playlists}
+          playlists={playlists || []}
         />
         <SearchContainer>
           <SearchContent>
@@ -122,6 +128,19 @@ const Search: React.FC = () => {
             <FiSearch />
           </SearchContent>
         </SearchContainer>
+        <TypeContainer>
+          {types.map(t => (
+            <TypeItem
+              key={t}
+              // onClick={() => setType(t as 'track' | 'album' | 'artist')}
+              active={t === 'track'}
+              type={t}
+            >
+              {t}
+            </TypeItem>
+          ))}
+        </TypeContainer>
+
         {tracks?.map(track => (
           <TrackContainer key={track.id}>
             <TrackImg

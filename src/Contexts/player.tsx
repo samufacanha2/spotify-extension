@@ -10,7 +10,7 @@ export const PlayerContext = createContext({} as IPlayer);
 
 export const PlayerProvider: React.FC<{ children: any }> = ({ children }) => {
   const player = useRef<any>(null);
-  const [uris, setUris] = useState(['spotify:artist:6HQYnRM4OzToCYPpVBInuU']);
+  const [uris, setUris] = useState(['']);
 
   const values: IPlayer = {
     player,

@@ -1,8 +1,34 @@
+import { darken } from 'polished';
 import styled, { css } from 'styled-components';
 
-export const Container = styled.div<{ isOpen: boolean }>`
+export const Background = styled.div<{ isOpen: boolean }>`
+  min-width: 100%;
+  min-height: 100%;
+
+  background-color: rgba(0, 0, 0, 0.85);
+
+  visibility: hidden;
+  opacity: 0;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999;
+
+  ${props =>
+    props.isOpen &&
+    css`
+      visibility: visible;
+      opacity: 1;
+    `}
+`;
+
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
+
+  padding: 1rem;
+  border-radius: 0.5rem;
 
   overflow-y: hidden;
   height: 70%;
@@ -13,23 +39,9 @@ export const Container = styled.div<{ isOpen: boolean }>`
   left: 0;
   z-index: 1;
 
+  background-color: rgba(255, 255, 255, 0.3);
+
   transform: translate(5%, 15%);
-
-  visibility: hidden;
-  opacity: 0.3;
-
-  transition: opacity 0.3s;
-
-  background-color: ${props => props.theme.darkgreen};
-
-  backdrop-filter: brightness(0.5);
-
-  ${props =>
-    props.isOpen &&
-    css`
-      visibility: visible;
-      opacity: 1;
-    `}
 `;
 export const Header = styled.div`
   display: flex;
@@ -56,6 +68,25 @@ export const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
+  padding-right: 0.5rem;
+
+  ::-webkit-scrollbar {
+    width: 0.25rem;
+    z-index: 1;
+  }
+  ::-webkit-scrollbar-track {
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+    box-shadow: none;
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${props => props.theme.white};
+
+    border-radius: 10px;
+  }
 `;
 
 export const TrackContainer = styled.div`
@@ -64,6 +95,8 @@ export const TrackContainer = styled.div`
   gap: 1rem;
 
   padding: 0.5rem;
+
+  background-color: ${props => darken(0.1, props.theme.darkgreen)};
 
   border-radius: 0.5rem;
   backdrop-filter: grayscale(1);
@@ -110,3 +143,5 @@ export const TrackActions = styled.div`
     cursor: pointer;
   }
 `;
+
+export const LoadingMore = styled.div``;
