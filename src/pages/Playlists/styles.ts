@@ -15,7 +15,19 @@ export const Header = styled.div`
   width: 100%;
 `;
 
-export const HeaderContent = styled.div``;
+export const HeaderContent = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 1rem;
+
+  svg {
+    cursor: pointer;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+`;
 export const Play = styled.div``;
 
 export const Back = styled.span`
